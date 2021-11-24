@@ -32,4 +32,11 @@ public class RaidController {
         return new ResponseEntity<>(raid, HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/raids")
+    public ResponseEntity<List<Raid>> findRaidsFilterByLocation(@RequestParam(name = "location", required = false) String location){
+        if(location != null){
+            return new ResponseEntity<>(raidRepository.findByRaidLocation(location), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(raidRepository.findAll(), HttpStatus.OK);
+    }
 }
